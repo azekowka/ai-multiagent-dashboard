@@ -1,9 +1,12 @@
+from dotenv import load_dotenv
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.playground import Playground
 from agno.storage.sqlite import SqliteStorage
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.yfinance import YFinanceTools
+
+load_dotenv()
 
 agent_storage: str = "tmp/agents.db"
 
