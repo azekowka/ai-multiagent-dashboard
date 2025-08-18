@@ -1,0 +1,3 @@
+[submodule "helicone"]
+	path = helicone
+	url = https://github.com/azekowka/helicone.git
