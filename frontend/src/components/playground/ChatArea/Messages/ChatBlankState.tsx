@@ -7,9 +7,9 @@ import { IconType } from '@/components/ui/icon/types'
 import React, { useState } from 'react'
 
 const EXTERNAL_LINKS = {
-  documentation: 'https://agno.link/agent-ui',
-  playground: 'https://app.agno.com/playground/agents',
-  agno: 'https://agno.com'
+  documentation: 'https://github.com/azekowka/ai-multiagent-dashboard',
+  playground: 'http://localhost:3000',
+  agno: '#'
 }
 
 const TECH_ICONS = [
@@ -172,7 +172,7 @@ const ChatBlankState = () => {
               </div>
             </span>
           </div>
-          <p>For the full experience, visit the Agent Playground.</p>
+          <p></p>
         </motion.h1>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
