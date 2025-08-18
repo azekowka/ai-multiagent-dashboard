@@ -19,24 +19,72 @@ const ENDPOINT_PLACEHOLDER = 'NO ENDPOINT ADDED'
 const SidebarHeader = () => (
   <div className="flex items-center gap-2">
     <Icon type="agno" size="xs" />
-    <span className="text-xs font-medium uppercase text-white">Agent UI</span>
+    <span className="text-xs font-medium uppercase text-white">Multiagent Dashboard</span>
   </div>
+)
+
+const DashboardButton = ({
+  isActive,
+  onClick
+}: {
+  isActive: boolean
+  onClick: () => void
+}) => (
+  <Button
+    onClick={onClick}
+    size="lg"
+    className={`h-9 w-full rounded-xl text-xs font-medium ${
+      isActive 
+        ? 'bg-primary text-background hover:bg-primary/80' 
+        : 'bg-accent text-muted hover:bg-accent/80 border border-primary/15'
+    }`}
+  >
+    <Icon type="agno" size="xs" className={isActive ? 'text-background' : 'text-muted'} />
+    <span className="uppercase">Dashboard</span>
+  </Button>
+)
+
+const RequestsButton = ({
+  isActive,
+  onClick
+}: {
+  isActive: boolean
+  onClick: () => void
+}) => (
+  <Button
+    onClick={onClick}
+    size="lg"
+    className={`h-9 w-full rounded-xl text-xs font-medium ${
+      isActive 
+        ? 'bg-primary text-background hover:bg-primary/80' 
+        : 'bg-accent text-muted hover:bg-accent/80 border border-primary/15'
+    }`}
+  >
+    <Icon type="sheet" size="xs" className={isActive ? 'text-background' : 'text-muted'} />
+    <span className="uppercase">Requests</span>
+  </Button>
 )
 
 const NewChatButton = ({
   disabled,
-  onClick
+  onClick,
+  isActive
 }: {
   disabled: boolean
   onClick: () => void
+  isActive: boolean
 }) => (
   <Button
     onClick={onClick}
     disabled={disabled}
     size="lg"
-    className="h-9 w-full rounded-xl bg-primary text-xs font-medium text-background hover:bg-primary/80"
+    className={`h-9 w-full rounded-xl text-xs font-medium ${
+      isActive 
+        ? 'bg-primary text-background hover:bg-primary/80' 
+        : 'bg-accent text-muted hover:bg-accent/80 border border-primary/15'
+    }`}
   >
-    <Icon type="plus-icon" size="xs" className="text-background" />
+    <Icon type="plus-icon" size="xs" className={isActive ? 'text-background' : 'text-muted'} />
     <span className="uppercase">New Chat</span>
   </Button>
 )
@@ -209,7 +257,9 @@ const Sidebar = () => {
     isEndpointActive,
     selectedModel,
     hydrated,
-    isEndpointLoading
+    isEndpointLoading,
+    currentView,
+    setCurrentView
   } = usePlaygroundStore()
   const [isMounted, setIsMounted] = useState(false)
   const [agentId] = useQueryState('agent')
@@ -223,6 +273,15 @@ const Sidebar = () => {
   const handleNewChat = () => {
     clearChat()
     focusChatInput()
+    setCurrentView('chat')
+  }
+
+  const handleDashboardClick = () => {
+    setCurrentView('dashboard')
+  }
+
+  const handleRequestsClick = () => {
+    setCurrentView('requests')
   }
 
   return (
@@ -255,9 +314,18 @@ const Sidebar = () => {
         }}
       >
         <SidebarHeader />
+        <DashboardButton
+          isActive={currentView === 'dashboard'}
+          onClick={handleDashboardClick}
+        />
+        <RequestsButton
+          isActive={currentView === 'requests'}
+          onClick={handleRequestsClick}
+        />
         <NewChatButton
           disabled={messages.length === 0}
           onClick={handleNewChat}
+          isActive={currentView === 'chat'}
         />
         {isMounted && (
           <>

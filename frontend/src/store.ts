@@ -27,6 +27,8 @@ export interface Team {
 interface PlaygroundStore {
   hydrated: boolean
   setHydrated: () => void
+  currentView: 'dashboard' | 'chat' | 'requests'
+  setCurrentView: (view: 'dashboard' | 'chat' | 'requests') => void
   streamingErrorMessage: string
   setStreamingErrorMessage: (streamingErrorMessage: string) => void
   endpoints: {
@@ -81,6 +83,8 @@ export const usePlaygroundStore = create<PlaygroundStore>()(
     (set) => ({
       hydrated: false,
       setHydrated: () => set({ hydrated: true }),
+      currentView: 'chat',
+      setCurrentView: (view) => set(() => ({ currentView: view })),
       streamingErrorMessage: '',
       setStreamingErrorMessage: (streamingErrorMessage) =>
         set(() => ({ streamingErrorMessage })),
