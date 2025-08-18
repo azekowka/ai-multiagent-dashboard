@@ -9,6 +9,9 @@
 8. cd frontend
 9. pnpm i
 10. pnpm dev
+![alt text](<Снимок экрана 2025-08-18 173923.png>)
+![alt text](<Снимок экрана 2025-08-18 173902.png>)
+![alt text](<Снимок экрана 2025-08-18 174001.png>)
 
 ## Helicone LLM Observability Clone
 1. cd web
